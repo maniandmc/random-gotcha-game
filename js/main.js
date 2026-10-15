@@ -253,8 +253,23 @@ $('btn-refill').addEventListener('click', () => {
   toast(`💎 ${CONFIG.refillAmount.toLocaleString()} 충전!`);
 });
 
+// confirm() 창이 막힌 환경(웹 임베드 등)에서도 동작하도록 "두 번 눌러 확인" 방식을 씁니다.
+let resetTimer = null;
+function disarmReset() {
+  clearTimeout(resetTimer);
+  resetTimer = null;
+  $('btn-reset').textContent = '데이터 초기화';
+  $('btn-reset').classList.remove('danger');
+}
+
 $('btn-reset').addEventListener('click', () => {
-  if (!confirm('모든 기록을 지우고 처음부터 시작할까요?')) return;
+  if (!resetTimer) {
+    $('btn-reset').textContent = '한 번 더 누르면 초기화';
+    $('btn-reset').classList.add('danger');
+    resetTimer = setTimeout(disarmReset, 3000);
+    return;
+  }
+  disarmReset();
   state = newState();
   saveState();
   render();
