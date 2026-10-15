@@ -1,0 +1,66 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>운명의 소환</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <h1>✨ 운명의 소환</h1>
+    <div class="wallet">
+      <span class="gem">💎 <b id="gems">0</b></span>
+      <button id="btn-refill" class="btn small">+ 충전</button>
+    </div>
+  </header>
+
+  <main>
+    <section class="banner">
+      <div id="banner-art" class="banner-art"></div>
+      <h2>전설의 소환</h2>
+      <p id="banner-rate"></p>
+      <div class="pity">
+        <div class="pity-label"><span>천장 게이지</span><span id="pity-text"></span></div>
+        <div class="pity-bar"><div id="pity-fill"></div></div>
+      </div>
+      <div class="pull-buttons">
+        <button id="btn-pull-1" class="btn">1회 소환<small id="cost-1"></small></button>
+        <button id="btn-pull-10" class="btn primary"><span class="ribbon">SR 이상 확정</span>10회 소환<small id="cost-10"></small></button>
+      </div>
+    </section>
+
+    <nav class="tabs">
+      <button class="tab active" data-tab="collection">도감 <span id="collection-count"></span></button>
+      <button class="tab" data-tab="history">소환 기록</button>
+      <button class="tab" data-tab="rates">확률 정보</button>
+    </nav>
+
+    <section id="tab-collection" class="tab-panel active"><div id="collection"></div></section>
+    <section id="tab-history" class="tab-panel"><ul id="history" class="history"></ul></section>
+    <section id="tab-rates" class="tab-panel"><div id="rates"></div></section>
+
+    <footer>
+      <span>총 소환 <b id="total-pulls">0</b>회</span>
+      <button id="btn-reset" class="btn ghost small">데이터 초기화</button>
+    </footer>
+  </main>
+
+  <!-- 소환 연출 화면 -->
+  <div id="overlay" class="overlay hidden">
+    <div id="summon-orb" class="orb"></div>
+    <div id="results" class="results"></div>
+    <div class="overlay-actions">
+      <button id="btn-skip" class="btn ghost">모두 열기</button>
+      <button id="btn-close" class="btn primary hidden">확인</button>
+    </div>
+  </div>
+
+  <div id="toast" class="toast"></div>
+
+  <!-- 순서 중요: 데이터 → 로직 → 화면 -->
+  <script src="js/data.js"></script>
+  <script src="js/gacha.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
